@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeacherRecharge - Support for Educator Wellbeing</title>
+    <style>
+        :root {
+            --primary: #5c6bc0;
+            --primary-light: #8e99f3;
+            --primary-dark: #26418f;
+            --secondary: #66bb6a;
+            --secondary-light: #98ee99;
+            --secondary-dark: #338a3e;
+            --text: #333333;
+            --light-bg: #f5f7ff;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .welcome-message {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .welcome-message h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-body p {
+            margin-bottom: 1rem;
+        }
+        
+        .card-body ul {
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--secondary-dark);
+        }
+        
+        .btn-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .mood-tracker {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .mood-tracker h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .mood-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .mood-btn {
+            flex: 1;
+            margin: 0 0.5rem;
+            padding: 1rem 0.5rem;
+            border: 2px solid var(--primary-light);
+            border-radius: 8px;
+            background-color: var(--white);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .mood-btn:hover, .mood-btn.selected {
+            background-color: var(--primary-light);
+            color: white;
+        }
+        
+        .mood-btn:first-child {
+            margin-left: 0;
+        }
+        
+        .mood-btn:last-child {
+            margin-right: 0;
+        }
+        
+        .reflection-box {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+            margin-bottom: 1rem;
+        }
+        
+        .resource-section {
+            margin-bottom: 2rem;
+        }
+        
+        .resource-section h2 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .testimonial p:last-child {
+            font-style: italic;
+            margin-top: 0.5rem;
+            text-align: right;
+        }
+        
+        .daily-affirmation {
+            background-color: var(--secondary-light);
+            color: var(--text);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mood-options {
+                flex-direction: column;
+            }
+            
+            .mood-btn {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Support section styles */
+        .support-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .support-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .support-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .support-option {
+            background-color: var(--light-bg);
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        .support-option h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            animation: modalopen 0.4s;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--text);
+        }
+
+        @keyframes modalopen {
+            from {opacity: 0; transform: translateY(-60px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>TeacherRecharge</h1>
+            <p class="tagline">Support, Resources, and Community for Educator Wellbeing</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="welcome-message">
+            <h2>You're not alone in this journey</h2>
+            <p>Teaching is challenging, rewarding, and sometimes overwhelming. TeacherRecharge is here to support you through the difficult moments and celebrate your successes.</p>
+        </div>
+        
+        <div class="daily-affirmation" id="daily-affirmation">
+            "Your impact extends far beyond what you can see. You're planting seeds that will grow for years to come."
+        </div>
+        
+        <div class="mood-tracker">
+            <h2>How are you feeling today?</h2>
+            <div class="mood-options">
+                <button class="mood-btn" data-mood="struggling">Struggling</button>
+                <button class="mood-btn" data-mood="tired">Tired</button>
+                <button class="mood-btn" data-mood="okay">Okay</button>
+                <button class="mood-btn" data-mood="good">Good</button>
+                <button class="mood-btn" data-mood="great">Great</button>
+            </div>
+            <div id="mood-response" class="hidden">
+                <textarea class="reflection-box" placeholder="Would you like to reflect on why you're feeling this way? (optional)"></textarea>
+                <button class="btn btn-secondary btn-block" id="save-reflection">Save Reflection</button>
+            </div>
+            <div id="thank-you-message" class="hidden" style="text-align: center; margin-top: 1rem;">
+                <p>Thank you for sharing. Your reflections help build self-awareness.</p>
+            </div>
+        </div>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Quick Relief Techniques</h2>
+                </div>
+                <div class="card-body">
+                    <p>Try these evidence-based techniques when you need a moment to reset:</p>
+                    <ul>
+                        <li><strong>Box Breathing:</strong> Inhale for 4 counts, hold for 4, exhale for 4, hold for 4.</li>
+                        <li><strong>5-4-3-2-1 Grounding:</strong> Identify 5 things you see, 4 things you feel, 3 things you hear, 2 things you smell, and 1 thing you taste.</li>
+                        <li><strong>3-Minute Mindfulness:</strong> Focus on your breath, observe your thoughts without judgment.</li>
+                    </ul>
+                    <button class="btn btn-block" id="open-relief-modal">Practice Now</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Boundary Setting</h2>
+                </div>
+                <div class="card-body">
+                    <p>Healthy boundaries are essential for preventing burnout:</p>
+                    <ul>
+                        <li>Designate work-free times in your schedule</li>
+                        <li>Create an after-school shutdown ritual</li>
+                        <li>Practice saying "no" to additional responsibilities</li>
+                        <li>Communicate your limits clearly and professionally</li>
+                    </ul>
+                    <button class="btn btn-block" id="open-boundaries-modal">Get Boundary Templates</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Success Journal</h2>
+                </div>
+                <div class="card-body">
+                    <p>Document your positive impacts, no matter how small:</p>
+                    <ul>
+                        <li>Student breakthroughs and "aha" moments</li>
+                        <li>Positive feedback from students, parents, or colleagues</li>
+                        <li>Creative solutions you've implemented</li>
+                        <li>Moments of connection that remind you why you teach</li>
+                    </ul>
+                    <button class="btn btn-block" id="open-journal-modal">Start Journaling</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="support-section">
+            <h2>Find Support</h2>
+            <div class="support-options">
+                <div class="support-option">
+                    <h3>Connect with Peers</h3>
+                    <p>Join educator support groups to share experiences and strategies.</p>
+                    <button class="btn btn-secondary btn-block" id="open-community-modal">Explore Communities</button>
+                </div>
+                <div class="support-option">
+                    <h3>Professional Resources</h3>
+                    <p>Access counseling services and professional development opportunities.</p>
+                    <button class="btn btn-secondary btn-block" id="open-resources-modal">Find Resources</button>
+                </div>
+                <div class="support-option">
+                    <h3>Self-Care Library</h3>
+                    <p>Discover books, podcasts, and activities designed for educator wellbeing.</p>
+                    <button class="btn btn-secondary btn-block" id="open-selfcare-modal">Browse Library</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="resource-section">
+            <h2>You're Making a Difference</h2>
+            <div class="testimonial">
+                <p>"Last year, I was ready to quit teaching altogether. The burnout was real and overwhelming. Finding resources and community specifically for teachers helped me reconnect with my purpose and develop sustainable practices."</p>
+                <p>— Maya, 8th Grade Science Teacher</p>
+            </div>
+            <div class="testimonial">
+                <p>"Learning to prioritize my wellbeing wasn't selfish—it made me a better teacher. When I started implementing boundaries and self-care practices, my classroom actually became more positive and productive."</p>
+                <p>— James, High School English Teacher</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="relief-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Guided Relief Exercise</h2>
+            <p>Let's take a few minutes for a calming exercise. Find a comfortable position and follow along:</p>
+            <div id="relief-exercise-content" style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <p style="margin-bottom: 1rem;"><strong>Box Breathing Guide</strong></p>
+                <p id="breathing-instruction">Get ready...</p>
+                <div style="height: 200px; width: 200px; margin: 1rem auto; border: 3px solid var(--primary); position: relative;" id="breathing-box">
+                    <div style="position: absolute; height: 20px; width: 20px; background-color: var(--primary); border-radius: 50%; top: -10px; left: -10px;"></div>
+                </div>
+                <button class="btn btn-secondary btn-block" id="start-breathing">Begin Exercise</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="boundaries-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Setting Healthy Boundaries</h2>
+            <p>Here are some templates you can adapt for your specific situation:</p>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Email Templates</h3>
+                <p><strong>After-Hours Contact:</strong> "Thank you for your message. I check and respond to emails between [time] and [time] on school days. For urgent matters, please contact [appropriate contact]."</p>
+                <p><strong>Additional Responsibilities:</strong> "While I appreciate you thinking of me for this opportunity, I need to decline at this time as I am focusing on [current priorities]. I'd be happy to reconsider in [timeframe] when my schedule may allow for it."</p>
+            </div>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Workload Management Plan</h3>
+                <ul>
+                    <li>Designate specific days/times for grading and lesson planning</li>
+                    <li>Create a "must do" vs "nice to do" list each week</li>
+                    <li>Set a departure time from school and honor it</li>
+                    <li>Schedule at least one school-free day on weekends</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="journal-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Success Journal</h2>
+            <p>Record moments that remind you of your impact and purpose:</p>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Today's Entry</h3>
+                <textarea class="reflection-box" placeholder="What went well today? Did you see any student growth? Did you have a meaningful interaction? Did you overcome a challenge?" style="min-height: 150px;"></textarea>
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+                    <button class="btn">Save Entry</button>
+                    <button class="btn btn-secondary">View Past Entries</button>
+                </div>
+            </div>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Journal Prompts</h3>-
+                <ul>
+                    <li>Describe a moment when you felt you made a difference in a student's life.</li>
+                    <li>What teaching strategy or approach are you proud of developing?</li>
+                    <li>Recall a time when a lesson didn't go as planned, but you adapted successfully.</li>
+                    <li>What feedback have you received that affirmed your teaching practice?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="community-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Teacher Communities</h2>
+            <p>Connect with fellow educators who understand your experiences:</p>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Online Communities</h3>
+                <ul>
+                    <li><strong>Teacher Support Network</strong> - Weekly virtual meetups focused on wellbeing and resilience</li>
+                    <li><strong>Educator Mindfulness Group</strong> - Daily meditation sessions specifically for teachers</li>
+                    <li><strong>Subject-Specific Communities</strong> - Connect with others teaching similar content</li>
+                </ul>
+            </div>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Local Opportunities</h3>
+                <p>Enter your location to find nearby teacher support groups and events:</p>
+                <input type="text" placeholder="City or Zip Code" style="width: 100%; padding: 0.5rem; margin: 0.5rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                <button class="btn btn-secondary">Find Local Support</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="resources-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Professional Resources</h2>
+            <p>Services and programs designed to support educator wellbeing:</p>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Mental Health Support</h3>
+                <ul>
+                    <li><strong>Educator Assistance Programs</strong> - Many districts offer confidential counseling services</li>
+                    <li><strong>Therapy Options</strong> - Including telehealth and insurance-covered providers</li>
+                    <li><strong>Crisis Support Lines</strong> - 24/7 resources specifically for educators</li>
+                </ul>
+            </div>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Professional Development</h3>
+                <ul>
+                    <li><strong>Teacher Wellbeing Workshops</strong> - Skills-based training for managing stress</li>
+                    <li><strong>Time Management Courses</strong> - Strategies specific to educational settings</li>
+                    <li><strong>Resilience Building Programs</strong> - Evidence-based approaches to prevent burnout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="selfcare-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Self-Care Library</h2>
+            <p>Resources to nourish your wellbeing:</p>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Books</h3>
+                <ul>
+                    <li><strong>"Teacher Self-Care Manual"</strong> - Practical strategies for everyday resilience</li>
+                    <li><strong>"The Burnout Cure"</strong> - Understanding and healing educator exhaustion</li>
+                    <li><strong>"Onward: Cultivating Emotional Resilience in Educators"</strong> - Month-by-month framework</li>
+                </ul>
+            </div>
+            <div style="padding: 1rem; background-color: var(--light-bg); border-radius: 8px; margin: 1rem 0;">
+                <h3>Podcasts & Apps</h3>
+                <ul>
+                    <li><strong>"Teaching Well"</strong> - Weekly episodes on educator wellbeing</li>
+                    <li><strong>"Calm for Teachers"</strong> - Meditation app with educator-specific content</li>
+                    <li><strong>"Educator Self-Care"</strong> - Practical tips in 10-minute episodes</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>TeacherRecharge - Supporting Educator Wellbeing</p>
+        <p>Remember: Taking care of yourself is essential to taking care of your students.</p>
+    </footer>
+    
+    <script>
+        // Mood tracker functionality
+        const moodButtons = document.querySelectorAll('.mood-btn');
+        const moodResponse = document.getElementById('mood-response');
+        const thankYouMessage = document.getElementById('thank-you-message');
+        const saveReflectionBtn = document.getElementById('save-reflection');
+        
+        moodButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove selected class from all buttons
+                moodButtons.forEach(btn => btn.classList.remove('selected'));
+                // Add selected class to clicked button
+                this.classList.add('selected');
+                // Show response area
+                moodResponse.classList.remove('hidden');
+                
+                // Customize placeholder based on mood
+                const mood = this.getAttribute('data-mood');
+                const reflectionBox = document.querySelector('.reflection-box');
+                
+                switch(mood) {
+                    case 'struggling':
+                        reflectionBox.placeholder = "What's the biggest challenge you're facing today? Remember it's okay to struggle sometimes.";
+                        break;
+                    case 'tired':
+                        reflectionBox.placeholder = "What's draining your energy the most? Is there a small way you could recharge?";
+                        break;
+                    case 'okay':
+                        reflectionBox.placeholder = "What's keeping you balanced today? What could make things a bit better?";
+                        break;
+                    case 'good':
+                        reflectionBox.placeholder = "What's going well for you today? How can you build on this positive energy?";
+                        break;
+                    case 'great':
+                        reflectionBox.placeholder = "That's wonderful! What contributed to you feeling great today?";
+                        break;
+                }
+            });
+        });
+        
+        saveReflectionBtn.addEventListener('click', function() {
+            // In a real app, this would save to a database
+            moodResponse.classList.add('hidden');
+            thankYouMessage.classList.remove('hidden');
+            
+            // In a real implementation, we'd store this data
+            console.log('Mood saved:', document.querySelector('.mood-btn.selected').getAttribute('data-mood'));
+            console.log('Reflection:', document.querySelector('.reflection-box').value);
+            
+            // Clear the selection after a delay
+            setTimeout(() => {
+                thankYouMessage.classList.add('hidden');
+                moodButtons.forEach(btn => btn.classList.remove('selected'));
+                document.querySelector('.reflection-box').value = '';
+            }, 3000);
+        });
+        
+        // Modal functionality
+        const modals = document.querySelectorAll('.modal');
+        const modalButtons = {
+            'open-relief-modal': 'relief-modal',
+            'open-boundaries-modal': 'boundaries-modal',
+            'open-journal-modal': 'journal-modal',
+            'open-community-modal': 'community-modal',
+            'open-resources-modal': 'resources-modal',
+            'open-selfcare-modal': 'selfcare-modal'
+        };
+        
+        // Setup modal open buttons
+        for (const [buttonId, modalId] of Object.entries(modalButtons)) {
+            const button = document.getElementById(buttonId);
+            if (button) {
+                button.addEventListener('click', function() {
+                    document.getElementById(modalId).style.display = 'block';
+                });
+            }
+        }
+        
+        // Setup modal close buttons
+        const closeButtons = document.querySelectorAll('.close-btn');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+        
+        // Box breathing exercise
+        const startBreathingBtn = document.getElementById('start-breathing');
+        const breathingInstruction = document.getElementById('breathing-instruction');
+        const breathingBox = document.getElementById('breathing-box');
+        
+        startBreathingBtn.addEventListener('click', function() {
+            this.disabled = true;
+            this.textContent = 'Exercise in progress...';
+            
+            // Animation for the dot around the box
+            const dot = breathingBox.querySelector('div');
+            dot.style.transition = 'all 4s linear';
+            
+            const instructions = [
+                { text: "Inhale slowly through your nose...", position: { top: '-10px', left: '-10px' } },
+                { text: "Hold your breath...", position: { top: '-10px', left: '190px' } },
+                { text: "Exhale slowly through your mouth...", position: { top: '190px', left: '190px' } },
+                { text: "Hold your breath...", position: { top: '190px', left: '-10px' } }
+            ];
+            
+            let step = 0;
+            
+            function performStep() {
+                if (step >= 12) { // 3 full cycles
+                    breathingInstruction.textContent = "Great job! How do you feel?";
+                    startBreathingBtn.disabled = false;
+                    startBreathingBtn.textContent = 'Repeat Exercise';
+                    return;
+                }
+                
+                const instruction = instructions[step % 4];
+                breathingInstruction.textContent = instruction.text;
+                
+                // Move the dot
+                Object.entries(instruction.position).forEach(([key, value]) => {
+                    dot.style[key] = value;
+                });
+                
+                step++;
+                setTimeout(performStep, 4000); // Each step takes 4 seconds
+            }
+            
+            performStep();
+        });
+        
+        // Daily affirmation rotation
+        const affirmations = [
+            "Your impact extends far beyond what you can see. You're planting seeds that will grow for years to come.",
+            "Even on difficult days, you're
